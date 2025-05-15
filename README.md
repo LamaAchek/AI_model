@@ -1,99 +1,79 @@
-Plant Watering Prediction AI Model
-This project uses Machine Learning techniques to predict the amount of water a plant requires based on environmental sensor data like temperature, humidity, light, and soil moisture. Two ML models are evaluated: Gaussian Naive Bayes and Random Forest Regressor.
+# Plant Watering Prediction AI Model
 
-📁 Dataset
-Source: Data.xlsx
+This project applies machine learning techniques to predict the amount of water a plant needs using environmental sensor data, including temperature, humidity, light intensity, and soil moisture. The project evaluates two models: a classification-based approach (Gaussian Naive Bayes) and a regression-based approach (Random Forest Regressor).
 
-Rows: 1000 samples
+---
 
-Columns:
-year, month, day, hour, minute, second, temp, Humdity, light, moisture, water
+## 1. Dataset Overview
 
-Features Used (X):
+**Source:** `Data.xlsx`  
+**Samples:** 1000 rows  
+**Columns:**
+- `year`, `month`, `day`, `hour`, `minute`, `second`
+- `temp` (Temperature)
+- `Humidity` (Humidity)
+- `light` (Light intensity)
+- `moisture` (Soil moisture)
+- `water` (Water amount in mL)
 
-temp (Temperature)
+**Features Used (X):**
+- `temp`
+- `Humidity`
+- `light`
+- `moisture`
 
-Humdity (Humidity)
+**Target Variable (y):**
+- `water`
 
-light (Light intensity)
+---
 
-moisture (Soil moisture)
+## 2. Models Used
 
-Target Variable (y):
+### Gaussian Naive Bayes (GNB)
+- **Type:** Classification  
+- **Train/Test Split:** `train_test_split` with `random_state=1`  
+- **Training Accuracy:** 99.1%  
+- **Testing Accuracy:** 91.6%  
 
-water (Water amount in ml)
+### Random Forest Regressor
 
-⚙️ Models Used
-1. Gaussian Naive Bayes (GNB)
-Purpose: Classification-based approach to estimate water need.
+- **Type:** Regression  
+- **Mean Squared Error (MSE):** 1.004  
+- **Mean Absolute Error (MAE):** 0.184  
+- **Observation:** Performs well overall but may produce unrealistic predictions under extreme moisture conditions.
 
-Train/Test Split: Used train_test_split with random_state=1
+---
 
-Accuracy:
+### 3. Data Visualization
 
-Training Score: 0.991
+- **Pairplots:**  
+  Show relationships between variables such as temperature, humidity, moisture, and water.
 
-Testing Score: 0.916
+- **Linear Regression Plots:**  
+  Plotted each feature against water using regression trendlines and correlation metrics.
 
-Prediction Examples:
+- **Key Findings:**  
+  - Strong negative correlation between moisture and water: -0.98  
+  - Humidity negatively correlated with water: -0.82  
+  - Temperature and light positively correlated with water
 
-python
-Copy
-Edit
-Xnew = [[24,20,140,350]]
-ynew = model.predict(Xnew)  # → [0]
-2. Random Forest Regressor
-Purpose: Regression-based prediction of water quantity.
+---
 
-Mean Squared Error (MSE): 1.004
+### 4. Evaluation Summary
 
-Mean Absolute Error (MAE): 0.184
+| Metric                | GaussianNB (Classifier) | Random Forest (Regressor) |
+|-----------------------|-------------------------|---------------------------|
+| Accuracy (Test)       | 91.6%                   | N/A                       |
+| Mean Squared Error    | 16.10                   | 1.00                      |
+| Mean Absolute Error   | 0.58                    | 0.18                      |
 
-Note: Performs well but gives unrealistic predictions for extreme moisture values.
+- GaussianNB performs well for classification when moisture levels are within a normal range.  
+- Random Forest offers more detailed predictions but struggles with extreme input values.
 
-📊 Data Visualization
-Pairplots: Displayed relationships between features like temp, humidity, moisture, and water.
+---
 
-Linear Regression Plots: Plotted each feature vs. water with trendlines and correlation metrics.
+### 5. Setup Instructions
 
-Findings:
-
-Strong negative correlation between moisture and water (-0.98)
-
-Humidity is negatively correlated with water (-0.82)
-
-Temperature and light are positively correlated with water
-
-🧮 Evaluation Metrics
-Metric	GaussianNB	Random Forest
-Accuracy (Test)	91.6%	N/A (regressor)
-MSE	16.10	1.00
-MAE	0.58	0.18
-
-✅ GNB is more robust for classification when moisture values are within a normal range.
-⚠️ Random Forest shows prediction issues with extreme moisture levels.
-
-🔧 Setup Instructions
-Install Dependencies
-
-bash
-Copy
-Edit
+**Install Dependencies**  
+```bash
 pip install pandas numpy matplotlib seaborn scikit-learn openpyxl
-Run the Code
-
-Ensure Data.xlsx is in the same directory.
-
-Execute the script in an environment like Jupyter Notebook or VS Code.
-
-🚀 Future Improvements
-Add moisture threshold normalization
-
-Incorporate time-based trends
-
-Hyperparameter tuning for Random Forest
-
-Train with larger, more balanced dataset
-
-📌 Note
-This project is meant for educational and prototyping purposes. Predictions are model-based and should be validated against real-world experiments in smart agriculture settings.
